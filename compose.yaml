@@ -1,0 +1,29 @@
+services:
+  ros:
+    build:
+      context: .
+      args:
+        USERNAME: ros
+        USER_UID: ${USER_UID:-1000}
+        USER_GID: ${USER_GID:-1000}
+      dockerfile: Dockerfile
+
+    image: ubuntu-24_04-docker:dev
+    container_name: ubuntu-24_04-docker
+
+    network_mode: host
+    
+    environment:
+      SSH_AUTH_SOCK: /ssh-agent
+      TERM: xterm-256color
+
+    volumes:
+      - ./ros2_ws:/home/ros/ros2_ws
+      - ${HOME}/dotfiles:/home/ros/dotfiles
+      - ${HOME}/code:/home/ros/code
+      - ${SSH_AUTH_SOCK}:/ssh-agent
+
+    stdin_open: true
+    tty: true
+
+    command: sleep infinity
