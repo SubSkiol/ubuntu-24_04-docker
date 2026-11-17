@@ -38,4 +38,8 @@ RUN echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" \
 USER ros
 WORKDIR /home/ros
 
+# My dotfiles are sacred!
+ENV ZDOTDIR=/home/ros/dotfiles/zsh
+
+
 CMD ["zsh"]
